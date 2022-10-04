@@ -1,0 +1,54 @@
+availableBalance = 10000
+
+def deposit():
+    global availableBalance
+    prom = input('enter the amount you want to deposit or press 1 to go back')
+    if(int(prom)==1):
+        main()
+    else:
+        if(prom.isdigit()):
+            depo = int(prom)
+            if(depo<=0):
+                print('deposit should be greater than zero')
+        else:
+            print('enter a valid number')
+            deposit()
+
+    updatedAmount = availableBalance+depo
+    print(f"Amount {prom} credited to your account balace:{availableBalance+depo}")
+    availableBalance = updatedAmount
+    main()
+
+def debit():
+    global availableBalance
+    popup = input('Enter the amount in numbers or press 1 to go back')
+    if(int(popup)==1):
+        main()
+    else:
+        if(popup.isdigit()):
+            amount = int(popup)
+            if(amount<100 or amount%100!=0):
+                print('please enter values above 100 and in multiples of 100')
+                debit()
+            elif(amount>availableBalance):
+                print('insuffiecient balance')
+                return
+        else:
+            print('enter a valid number')
+            debit()
+
+    updatedAmount = availableBalance-amount
+    print(f"please collect your amount {amount} \nbalance:{updatedAmount}")
+    availableBalance = updatedAmount
+
+    main()
+
+def main():
+    popup = int(input('press 1 to deposit or press 2 to debit'))
+    if(popup==1):
+        deposit()
+
+    elif(popup==2):
+        debit()
+
+main()
